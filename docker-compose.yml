@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  romantest:
+    container_name: romantest
+    build: .
+    command: ["php", "-S", "0.0.0.0:8279", "-t", "public"]
+    ports:
+      - "8279:8279"
+    volumes:
+      - ${PWD}:/var/www:delegated
+      - ~/.composer/auth.json:/root/.composer/auth.json:ro
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
